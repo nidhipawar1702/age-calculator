@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos | Premium Age & Life Journey Calculator</title>
+    <meta name="description" content="Discover your exact age, birth statistics, astrological profile, and watch your life seconds tick in real-time with Chronos.">
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="Chronos | Premium Age & Life Journey Calculator">
+    <meta property="og:description" content="Discover your exact age, birth statistics, astrological profile, and watch your life seconds tick in real-time.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background animations -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo-area">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <h1>Chronos</h1>
+            </div>
+            <p class="subtitle">Your life journey, measured in moments.</p>
+        </header>
+
+        <!-- Main Card Section -->
+        <main class="app-main">
+            <!-- Input Form Card -->
+            <section class="input-card card" id="input-card-section">
+                <h2 class="card-title">When did your journey begin?</h2>
+                <form id="age-form" class="age-form" onsubmit="event.preventDefault();">
+                    <div class="input-grid">
+                        <div class="form-group">
+                            <label for="birth-date">Birth Date <span class="required">*</span></label>
+                            <input type="date" id="birth-date" required max="2026-06-20">
+                        </div>
+                        <div class="form-group">
+                            <label for="birth-time">Birth Time <span class="optional">(Optional)</span></label>
+                            <input type="time" id="birth-time" value="00:00">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="calculate-btn" class="btn btn-primary">
+                        <span>Reveal My Journey</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Results Dashboard (Hidden initially, shown after calculation) -->
+            <div id="results-dashboard" class="results-dashboard hidden">
+                
+                <!-- Quick Summary / Reset Button -->
+                <div class="dashboard-controls">
+                    <button id="recalculate-btn" class="btn btn-secondary">
+                        <svg class="btn-icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                            <polyline points="3 3 3 8 8 8"></polyline>
+                        </svg>
+                        <span>Change Date</span>
+                    </button>
+                </div>
+
+                <!-- Primary Age Card (Years, Months, Days) -->
+                <section class="primary-age-card card">
+                    <h3 class="card-subtitle">Exact Age</h3>
+                    <div class="age-numbers-grid">
+                        <div class="age-number-box">
+                            <span class="number" id="age-years">00</span>
+                            <span class="label">Years</span>
+                        </div>
+                        <div class="age-number-box">
+                            <span class="number" id="age-months">00</span>
+                            <span class="label">Months</span>
+                        </div>
+                        <div class="age-number-box">
+                            <span class="number" id="age-days">00</span>
+                            <span class="label">Days</span>
+                        </div>
+                    </div>
+                    <div class="exact-summary-text" id="exact-summary">
+                        You have been traveling through the cosmos for 0 years, 0 months, and 0 days.
+                    </div>
+                </section>
+
+                <div class="dashboard-grid">
+                    <!-- Column 1: Next Birthday Countdown & Astro Profile -->
+                    <div class="dashboard-column">
+                        <!-- Next Birthday Countdown Card -->
+                        <section class="countdown-card card">
+                            <h3 class="card-title-small">
+                                <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                Next Birthday Countdown
+                            </h3>
+                            <div class="birthday-countdown-grid">
+                                <div class="countdown-item">
+                                    <span class="count-num" id="countdown-months">00</span>
+                                    <span class="count-lbl">Months</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="count-num" id="countdown-days">00</span>
+                                    <span class="count-lbl">Days</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="count-num" id="countdown-hours">00</span>
+                                    <span class="count-lbl">Hours</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="count-num" id="countdown-minutes">00</span>
+                                    <span class="count-lbl">Min</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="count-num" id="countdown-seconds">00</span>
+                                    <span class="count-lbl">Sec</span>
+                                </div>
+                            </div>
+                            <div class="next-birthday-info" id="next-birthday-date">
+                                Turning 00 on Monday, January 1st.
+                            </div>
+                        </section>
+
+                        <!-- Astrological Profile Card -->
+                        <section class="astro-card card">
+                            <h3 class="card-title-small">
+                                <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                Cosmic Profile
+                            </h3>
+                            <div class="astro-grid">
+                                <div class="astro-item">
+                                    <div class="astro-icon-wrapper" id="zodiac-color-theme">
+                                        <span class="astro-symbol" id="zodiac-symbol">♈</span>
+                                    </div>
+                                    <div class="astro-details">
+                                        <span class="astro-label">Zodiac Sign</span>
+                                        <span class="astro-val" id="zodiac-name">Aries</span>
+                                        <span class="astro-subval" id="zodiac-element">Fire Element</span>
+                                    </div>
+                                </div>
+                                <div class="astro-item">
+                                    <div class="astro-icon-wrapper chinese-zodiac-wrapper" id="chinese-zodiac-color-theme">
+                                        <span class="astro-symbol" id="chinese-zodiac-symbol">🐉</span>
+                                    </div>
+                                    <div class="astro-details">
+                                        <span class="astro-label">Chinese Zodiac</span>
+                                        <span class="astro-val" id="chinese-zodiac-name">Dragon</span>
+                                        <span class="astro-subval" id="chinese-zodiac-element">Wood Element</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Column 2: Live Time Counter & Key Milestones -->
+                    <div class="dashboard-column">
+                        <!-- Live Time Lived Card -->
+                        <section class="live-counter-card card">
+                            <h3 class="card-title-small">
+                                <svg class="card-title-icon live-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 15 15"></polyline>
+                                </svg>
+                                Life Ticker (Real-Time)
+                            </h3>
+                            <div class="ticker-list">
+                                <div class="ticker-item">
+                                    <span class="ticker-label">Total Years Lived</span>
+                                    <span class="ticker-value" id="ticker-years">0.00000000</span>
+                                </div>
+                                <div class="ticker-item">
+                                    <span class="ticker-label">Total Days Lived</span>
+                                    <span class="ticker-value" id="ticker-days">0</span>
+                                </div>
+                                <div class="ticker-item">
+                                    <span class="ticker-label">Total Hours Lived</span>
+                                    <span class="ticker-value" id="ticker-hours">0</span>
+                                </div>
+                                <div class="ticker-item">
+                                    <span class="ticker-label">Total Minutes Lived</span>
+                                    <span class="ticker-value" id="ticker-minutes">0</span>
+                                </div>
+                                <div class="ticker-item">
+                                    <span class="ticker-label">Total Seconds Lived</span>
+                                    <span class="ticker-value highlight" id="ticker-seconds">0</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Key Milestones & Statistics Card -->
+                        <section class="stats-card card">
+                            <h3 class="card-title-small">
+                                <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                                Life Milestones & Stats
+                            </h3>
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <span class="stat-icon">📅</span>
+                                    <span class="stat-lbl">Born On</span>
+                                    <span class="stat-val" id="stat-born-day">Sunday</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-icon">🔮</span>
+                                    <span class="stat-lbl">Life Path Number</span>
+                                    <span class="stat-val" id="stat-life-path">7</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-icon">❤️</span>
+                                    <span class="stat-lbl">Estimated Heartbeats</span>
+                                    <span class="stat-val" id="stat-heartbeats">0 M</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-icon">💨</span>
+                                    <span class="stat-lbl">Estimated Breaths</span>
+                                    <span class="stat-val" id="stat-breaths">0 M</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-icon">😴</span>
+                                    <span class="stat-lbl">Estimated Sleep Time</span>
+                                    <span class="stat-val" id="stat-sleep">0 Y</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-icon">🏆</span>
+                                    <span class="stat-lbl">Next Big Milestone</span>
+                                    <span class="stat-val" id="stat-milestone">10K Days</span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Life Path Explanation Modal/Tooltip and Fun Description -->
+                <div class="life-path-description card">
+                    <p class="description-text" id="life-journey-description">
+                        "Your journey is uniquely yours. Time is a companion, not an adversary. Make every second count."
+                    </p>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>Chronos &copy; 2026. Made with ❤️ for your lifetime.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
